@@ -1,5 +1,3 @@
-# Makefile
-
 ccflags-y += -I$(src)/inc
 
 ifneq ($(KERNELRELEASE),)
