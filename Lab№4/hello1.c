@@ -10,7 +10,7 @@ MODULE_AUTHOR ("Stanislav Osipov <stasosipov09092004@gmail.com>");
 MODULE_DESCRIPTION ("Hello, this is LabWork №4 - Module 1");
 MODULE_LICENSE("Dual BSD/GPL");
 
-struct hello_event {
+struct hello_data {
     struct list_head list;
     ktime_t time_before;
     ktime_t time_after; // Нове поле ktime_t
@@ -22,7 +22,7 @@ static struct list_head hello_list_head;
 
 void print_hello(uint count) {
     int i;
-    struct hello_event *ptr;
+    struct hello_data *ptr;
 
     if (count == 0) {
         pr_warn("Count is 0.\n");
@@ -57,7 +57,7 @@ static int __init hello1_init(void) {
 }
 
 static void __exit hello1_exit(void) {
-    struct hello_event *ptr, *temp;
+    struct hello_data *ptr, *temp;
 
     list_for_each_entry_safe(ptr, temp, &hello_list_head, list) {
         pr_info("Time taken: %lld ns\n", ktime_to_ns(ktime_sub(ptr->time_after, ptr->time_before)));
